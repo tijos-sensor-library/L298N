@@ -1,4 +1,4 @@
-package tijos.framework.sensor.l298n;
+package tijos.framework.transducer.l298n;
 
 import java.io.IOException;
 
@@ -36,6 +36,11 @@ public class TiL298N {
 	int motorBpin1;
 	int motorBpin2;
 	int motorBPWM;
+	
+	/**
+	 * MotorA/B speed
+	 */
+	int motorSpeed;
 
 	
 	/** 
@@ -73,6 +78,8 @@ public class TiL298N {
 		gpioObj.setPinMode(motorBpin2, TiGPIO.MODE_OUTPUT_PP, TiGPIO.MODE_PULL_NONE);
 		
 		pwmObj.changePeriod(2000); //500HZ
+		
+		this.motorSpeed = 0;
 
 	}
 	
@@ -83,11 +90,13 @@ public class TiL298N {
 	 *            Value from 0 to 255.
 	 */
 	public void setSpeed(int speed) throws IOException {
+		if(this.motorSpeed != speed) {
+			pwmObj.changeChannelDuty(motorAPWM, speed);
+			pwmObj.changeChannelDuty(motorBPWM, speed);
 		
-		pwmObj.changeChannelDuty(motorAPWM, speed);
-		pwmObj.changeChannelDuty(motorBPWM, speed);
-		
-		pwmObj.updatePeriodAndDuty();
+			pwmObj.updatePeriodAndDuty();
+			this.motorSpeed = speed;
+		}
 	}
 
 	/**
@@ -143,7 +152,7 @@ public class TiL298N {
 	 * 
 	 * @throws IOException
 	 */
-	public void turn_right(int speed) throws IOException {
+	public void turnRight(int speed) throws IOException {
 
 		gpioObj.writePin(this.motorApin1, 0);
 		gpioObj.writePin(this.motorApin2, 1);
@@ -159,7 +168,7 @@ public class TiL298N {
 	 * 
 	 * @throws IOException
 	 */
-	public void turn_left(int speed) throws IOException {
+	public void turnLeft(int speed) throws IOException {
 
 		gpioObj.writePin(this.motorApin1, 1);
 		gpioObj.writePin(this.motorApin2, 0);
