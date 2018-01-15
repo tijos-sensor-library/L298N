@@ -1,10 +1,10 @@
-package tijos.framework.sensor.l298n;
+package tijos.sample.transducer.l298n;
 
 import java.io.IOException;
 
 import tijos.framework.devicecenter.TiGPIO;
 import tijos.framework.devicecenter.TiPWM;
-import tijos.framework.sensor.l298n.TiL298N;
+import tijos.framework.transducer.l298n.TiL298N;
 import tijos.util.Delay;
 
 public class TiL298NSample {
@@ -68,7 +68,7 @@ public class TiL298NSample {
 	
 			  Delay.msDelay(3000);
 			  
-			  l298n.turn_left(100);
+			  l298n.turnLeft(100);
 
 			  System.out.print("left ");
 				
@@ -80,7 +80,7 @@ public class TiL298NSample {
 	
 			  Delay.msDelay(3000);
 			  
-			  l298n.turn_right(100);
+			  l298n.turnRight(100);
 
 			  System.out.print("right ");
 				
