@@ -1,4 +1,4 @@
-package tijos.sample.transducer.l298n;
+package tijos.framework.transducer.l298n;
 
 import java.io.IOException;
 
