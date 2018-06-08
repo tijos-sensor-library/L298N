@@ -71,13 +71,13 @@ public class TiL298N {
 	 */
 	public void initialize() throws IOException {
 
-		gpioObj.setPinMode(motorApin1, TiGPIO.MODE_OUTPUT_PP, TiGPIO.MODE_PULL_NONE);
-		gpioObj.setPinMode(motorApin2, TiGPIO.MODE_OUTPUT_PP, TiGPIO.MODE_PULL_NONE);
+		gpioObj.setWorkMode(motorApin1, TiGPIO.OUTPUT_PP);
+		gpioObj.setWorkMode(motorApin2, TiGPIO.OUTPUT_PP);
 		
-		gpioObj.setPinMode(motorBpin1, TiGPIO.MODE_OUTPUT_PP, TiGPIO.MODE_PULL_NONE);
-		gpioObj.setPinMode(motorBpin2, TiGPIO.MODE_OUTPUT_PP, TiGPIO.MODE_PULL_NONE);
+		gpioObj.setWorkMode(motorBpin1, TiGPIO.OUTPUT_PP);
+		gpioObj.setWorkMode(motorBpin2, TiGPIO.OUTPUT_PP);
 		
-		pwmObj.changePeriod(2000); //500HZ
+		pwmObj.setFrequency(500); //500hz
 		
 		this.motorSpeed = 0;
 
@@ -91,10 +91,10 @@ public class TiL298N {
 	 */
 	public void setSpeed(int speed) throws IOException {
 		if(this.motorSpeed != speed) {
-			pwmObj.changeChannelDuty(motorAPWM, speed);
-			pwmObj.changeChannelDuty(motorBPWM, speed);
+			pwmObj.setDutyCycle(motorAPWM, speed/255.0);
+			pwmObj.setDutyCycle(motorBPWM, speed/255.0);
 		
-			pwmObj.updatePeriodAndDuty();
+			pwmObj.updateFreqAndDuty();
 			this.motorSpeed = speed;
 		}
 	}
