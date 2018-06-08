@@ -5,7 +5,7 @@ import java.io.IOException;
 import tijos.framework.devicecenter.TiGPIO;
 import tijos.framework.devicecenter.TiPWM;
 import tijos.framework.transducer.l298n.TiL298N;
-import tijos.util.Delay;
+import tijos.framework.util.Delay;
 
 public class TiL298NSample {
 
